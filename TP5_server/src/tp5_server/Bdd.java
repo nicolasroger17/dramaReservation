@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tp5_server;
 
 import java.sql.Connection;
@@ -18,13 +17,26 @@ import java.util.ArrayList;
  * @author Nicolas
  */
 public class Bdd {
-    
+
     Connection conn;
-    
-    public Bdd(){
-        initializeDBConnection();
-    }    
-    
+
+    public Bdd() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            String url = "jdbc:mysql://localhost/tp5_communication";
+            conn = DriverManager.getConnection(url, "root", "");
+            //conn.close();
+        } catch (ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        } catch (IllegalAccessException ex) {
+            System.err.println(ex.getMessage());
+        } catch (InstantiationException ex) {
+            System.err.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
     public String book(SendData data) {
         String query = "SELECT id, remaining_places FROM drama WHERE name = '" + data.dramaName + "'";
         int remainingPlaces = 0;
@@ -91,24 +103,7 @@ public class Bdd {
         return new Drama(arrNames, arrPlaces);
     }
 
-    public void initializeDBConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            String url = "jdbc:mysql://localhost/tp5_communication";
-            conn = DriverManager.getConnection(url, "root", "");
-            //conn.close();
-        } catch (ClassNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        } catch (IllegalAccessException ex) {
-            System.err.println(ex.getMessage());
-        } catch (InstantiationException ex) {
-            System.err.println(ex.getMessage());
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
-    
-    public void close() throws Exception{
+    public void close() throws Exception {
         conn.close();
     }
 }

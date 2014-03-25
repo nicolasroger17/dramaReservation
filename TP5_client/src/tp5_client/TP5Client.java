@@ -13,6 +13,9 @@ public final class TP5Client{
     /**
      * Creates new form reservation_form
      * @throws java.lang.Exception
+     * 
+     * Main that create the controller who chat with the server
+     * and update the frame
      */
     public static void main(String[] argz) throws Exception {
         Controller controller = new Controller();

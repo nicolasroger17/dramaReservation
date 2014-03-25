@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 /**
  *
  * @author Nicolas
+ * 
+ * chat with the server and update the frame
  */
 public final class Controller {
 
@@ -36,7 +38,9 @@ public final class Controller {
      * @throws java.lang.Exception
      */
     public Controller() throws Exception {
+        // object that allows to serialize in JSON
         gson = new Gson();
+        // socket to connect to the server
         socket = new Socket("localhost", 4444);
         outSocket = new PrintWriter(socket.getOutputStream(), true);
         inSocket = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -45,12 +49,15 @@ public final class Controller {
         System.out.println((java.net.InetAddress.getLocalHost()).toString());
 
         System.out.println("Requesting dramas list from server");
-
+        
+        //first request to get the dramas list
         outSocket.println(gson.toJson(new SendData("getDramas")));
-
+        
+        //transform the answer in object and create the frame with the data
         this.drama = gson.fromJson(inSocket.readLine(), Drama.class);
         this.frame = new TP5Frame(this);
         
+        // tells the server to shutdown when the client leaves
         frame.addWindowListener(new WindowAdapter()
         {
             @Override
@@ -69,6 +76,8 @@ public final class Controller {
         final String response = inSocket.readLine();
         frame.setReservationStatus(response);
         
+        // timer to let some time to the frame to display
+        // the message before playing the little music
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             
@@ -81,7 +90,6 @@ public final class Controller {
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
         }, 0, 1000);
     }
 

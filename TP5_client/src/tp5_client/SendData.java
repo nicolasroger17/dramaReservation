@@ -6,14 +6,16 @@
 
 package tp5_client;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Nicolas
+ * 
+ * This class store data to send to the server so it
+ * can perform predefined actions
+ * 
+ * action can be : getDramas, book or close
  */
-public class SendData  implements Serializable{
-    static private final long serialVersionUID = 6L;
+public class SendData{
     String action;
     String firstname;
     String name;

@@ -54,6 +54,7 @@ class ProtocolThread extends Thread {
     @Override
     public void run() {
         try {
+            // listen until the client says it's over
             while(!isOver){
                 System.out.println("Waiting for a reservation...");
                 SendData data = gson.fromJson(in_socket.readLine(), SendData.class);
@@ -87,5 +88,4 @@ class ProtocolThread extends Thread {
             }
         }
     }
-
 }

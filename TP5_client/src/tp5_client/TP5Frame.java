@@ -7,6 +7,15 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
+/**
+ *
+ * @author Nicolas
+ * 
+ * Frame on the client side
+ * the code is generated that's why the view is not the most
+ * beautiful you have seen. 
+ * We couldn't make little changes after we decided to modify the code :(
+ */
 public class TP5Frame extends javax.swing.JFrame{
 
     private Controller controller;
