@@ -12,8 +12,7 @@ import java.io.Serializable;
  *
  * @author Nicolas
  */
-public class Drama implements Serializable{
-    static private final long serialVersionUID = 6L;
+public class Drama{
     String[] names;
     String[] numberOfPlaces;
     
