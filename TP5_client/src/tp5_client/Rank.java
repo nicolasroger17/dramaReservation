@@ -10,12 +10,14 @@ package tp5_client;
  *
  * @author Nicolas
  */
-public class Drama{
-    String[] names;
-    String[] numberOfPlaces;
+public class Rank {
     
-    public Drama(String[] names, String[] numberOfPlaces) {
-        this.names = names;
-        this.numberOfPlaces = numberOfPlaces;
+    public String[] users;
+    public int[] reservationCount;
+    
+    public Rank(String[] users, int[] reservationCount) {
+        this.users = users;
+        this.reservationCount = reservationCount;
     }
+    
 }

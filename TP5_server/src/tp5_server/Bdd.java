@@ -102,7 +102,31 @@ public class Bdd {
         }
         return new Drama(arrNames, arrPlaces);
     }
-
+    
+    public Rank getRanksFromDB(){
+        ArrayList<String> users = new ArrayList();
+        ArrayList<Integer> reservationsCount = new ArrayList();
+        String query = "SELECT CONCAT(firstname,' ',name) AS user, sum(number_of_places) AS places FROM reservations GROUP BY user ORDER BY places DESC";
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                users.add(rs.getString("user"));
+                reservationsCount.add(rs.getInt("places"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Fail to connect to database");
+            System.err.println(ex.getMessage());
+        }
+        String[] arrUsers = new String[users.size()];
+        int[] arrPlaces = new int[reservationsCount.size()];
+        for (int i = 0; i < users.size(); i++) {
+            arrUsers[i] = users.get(i);
+            arrPlaces[i] = reservationsCount.get(i);
+        }
+        return new Rank(arrUsers, arrPlaces);
+    }
+    
     public void close() throws Exception {
         conn.close();
     }

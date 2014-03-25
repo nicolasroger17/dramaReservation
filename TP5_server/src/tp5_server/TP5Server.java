@@ -66,6 +66,9 @@ class ProtocolThread extends Thread {
                     case "book":
                         out_socket.println(bdd.book(data));
                         break;
+                    case "rank":
+                        out_socket.println(gson.toJson(bdd.getRanksFromDB()));
+                        break;
                     case "close":
                         isOver = true;
                         break;

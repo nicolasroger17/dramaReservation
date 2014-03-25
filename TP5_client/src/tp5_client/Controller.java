@@ -57,6 +57,9 @@ public final class Controller {
         this.drama = gson.fromJson(inSocket.readLine(), Drama.class);
         this.frame = new TP5Frame(this);
         
+        outSocket.println(gson.toJson(new SendData("rank")));
+        new RankFrame(gson.fromJson(inSocket.readLine(), Rank.class));
+        
         // tells the server to shutdown when the client leaves
         frame.addWindowListener(new WindowAdapter()
         {
